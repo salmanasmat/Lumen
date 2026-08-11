@@ -123,6 +123,7 @@ public class ServicesService : IServicesService
                             if (sc.Status == ServiceControllerStatus.Running || sc.Status == ServiceControllerStatus.Paused)
                             {
                                 sc.Stop();
+                                service.Status = ServiceControllerStatus.Stopped.ToString();
                             }
                         }
                         catch { }

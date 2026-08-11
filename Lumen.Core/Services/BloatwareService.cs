@@ -150,7 +150,13 @@ public class BloatwareService : IBloatwareService
                 using var proc = Process.Start(psi);
                 if (proc != null)
                 {
+                    var errorOutput = proc.StandardError.ReadToEnd();
                     proc.WaitForExit(20000);
+
+                    if (!string.IsNullOrWhiteSpace(errorOutput))
+                    {
+                        return (false, $"Failed to remove '{package.DisplayName}': {errorOutput.Trim()}");
+                    }
                 }
 
                 await _sessionLogService.LogActionAsync(new ActionRecord

@@ -75,6 +75,7 @@ public partial class ServicesTunerViewModel : ObservableObject
 
             var (res, msg) = await _servicesService.ApplySafePresetAsync(session.Id);
             StatusText = msg;
+            await LoadServicesAsync();
         }
         catch (Exception ex)
         {
@@ -83,7 +84,6 @@ public partial class ServicesTunerViewModel : ObservableObject
         finally
         {
             IsLoading = false;
-            await LoadServicesAsync();
         }
     }
 
@@ -98,6 +98,7 @@ public partial class ServicesTunerViewModel : ObservableObject
             var session = await _sessionLogService.StartSessionAsync($"Disable Service '{service.ServiceName}'", true);
             var (res, msg) = await _servicesService.ChangeServiceStartTypeAsync(service, ServiceStartType.Disabled, session.Id);
             StatusText = msg;
+            await LoadServicesAsync();
         }
         catch (Exception ex)
         {
@@ -106,7 +107,6 @@ public partial class ServicesTunerViewModel : ObservableObject
         finally
         {
             IsLoading = false;
-            await LoadServicesAsync();
         }
     }
 }

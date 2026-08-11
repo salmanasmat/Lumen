@@ -40,22 +40,32 @@
             </StackPanel>
         </Grid>
 
-        <!-- DataGrid -->
-        <ui:DataGrid Grid.Row="1" ItemsSource="{Binding Services}" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" GridLinesVisibility="Horizontal">
-            <ui:DataGrid.Columns>
-                <DataGridTextColumn Header="Display Name" Binding="{Binding DisplayName}" Width="260" FontSize="13" FontWeight="SemiBold"/>
-                <DataGridTextColumn Header="Service Name" Binding="{Binding ServiceName}" Width="160" FontSize="12"/>
-                <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="100" FontSize="12"/>
-                <DataGridTextColumn Header="Startup Type" Binding="{Binding CurrentStartType}" Width="120" FontSize="12"/>
-                <DataGridCheckBoxColumn Header="Protected" Binding="{Binding IsNeverTouch, Mode=OneWay}" Width="90"/>
-                <DataGridTemplateColumn Header="Action" Width="120">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <ui:Button Content="Disable" Command="{Binding DataContext.DisableServiceCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding}" IsEnabled="{Binding IsNeverTouch, Converter={StaticResource InverseBooleanConverter}}" Padding="10,4"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </ui:DataGrid.Columns>
-        </ui:DataGrid>
+        <!-- DataGrid with Loading Overlay -->
+        <Grid Grid.Row="1">
+            <ui:DataGrid ItemsSource="{Binding Services}" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" GridLinesVisibility="Horizontal">
+                <ui:DataGrid.Columns>
+                    <DataGridTextColumn Header="Display Name" Binding="{Binding DisplayName}" Width="260" FontSize="13" FontWeight="SemiBold"/>
+                    <DataGridTextColumn Header="Service Name" Binding="{Binding ServiceName}" Width="160" FontSize="12"/>
+                    <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="100" FontSize="12"/>
+                    <DataGridTextColumn Header="Startup Type" Binding="{Binding CurrentStartType}" Width="120" FontSize="12"/>
+                    <DataGridCheckBoxColumn Header="Protected" Binding="{Binding IsNeverTouch, Mode=OneWay}" Width="90"/>
+                    <DataGridTemplateColumn Header="Action" Width="120">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <ui:Button Content="Disable" Command="{Binding DataContext.DisableServiceCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding}" IsEnabled="{Binding IsNeverTouch, Converter={StaticResource InverseBooleanConverter}}" Padding="10,4"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </ui:DataGrid.Columns>
+            </ui:DataGrid>
+
+            <!-- Loading Overlay -->
+            <Border Background="#80000000" Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}" CornerRadius="8">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <ui:ProgressRing IsIndeterminate="True" Width="48" Height="48"/>
+                    <TextBlock Text="{Binding StatusText}" Foreground="White" FontSize="13" Margin="0,12,0,0" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Border>
+        </Grid>
     </Grid>
 </Page>

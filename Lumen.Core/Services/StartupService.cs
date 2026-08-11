@@ -385,6 +385,7 @@ public class StartupService : IStartupService
         if (task != null)
         {
             task.Enabled = false;
+            task.RegisterChanges();
         }
 
         entry.IsEnabled = false;
@@ -411,6 +412,7 @@ public class StartupService : IStartupService
         if (task != null)
         {
             task.Enabled = true;
+            task.RegisterChanges();
         }
 
         entry.IsEnabled = true;

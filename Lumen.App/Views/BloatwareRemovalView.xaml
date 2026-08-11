@@ -13,48 +13,47 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Header -->
-        <Grid Grid.Row="0" Margin="0,0,0,20">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-
-            <StackPanel Grid.Column="0">
-                <TextBlock Text="Office Bloatware Removal Checklist" FontSize="24" FontWeight="SemiBold" Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
-                <TextBlock Text="{Binding StatusText}" FontSize="13" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,4,0,0"/>
-            </StackPanel>
-
-            <StackPanel Grid.Column="1" Orientation="Horizontal">
-                <ui:Button Content="Scan Packages" Command="{Binding LoadPackagesCommand}" Margin="0,0,12,0" Padding="14,8">
+        <StackPanel Grid.Row="0" Margin="0,0,0,20">
+            <TextBlock Text="Office Bloatware Removal Checklist" FontSize="24" FontWeight="SemiBold" Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+            <TextBlock Text="{Binding StatusText}" FontSize="13" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,4,0,12"/>
+            <WrapPanel Orientation="Horizontal">
+                <ui:Button Content="Scan Packages" Command="{Binding LoadPackagesCommand}" Margin="0,0,8,8" Padding="14,8">
                     <ui:Button.Icon>
                         <ui:SymbolIcon Symbol="ArrowSync24" />
                     </ui:Button.Icon>
                 </ui:Button>
-
-                <ui:Button Content="Select Recommended" Command="{Binding SelectRecommendedCommand}" Margin="0,0,12,0" Padding="14,8">
+                <ui:Button Content="Select Recommended" Command="{Binding SelectRecommendedCommand}" Margin="0,0,8,8" Padding="14,8">
                     <ui:Button.Icon>
                         <ui:SymbolIcon Symbol="CheckmarkCircle24" />
                     </ui:Button.Icon>
                 </ui:Button>
-
-                <ui:Button Content="Remove Selected" Command="{Binding RemoveSelectedCommand}" Appearance="Primary" Padding="14,8">
+                <ui:Button Content="Remove Selected" Command="{Binding RemoveSelectedCommand}" Appearance="Primary" Margin="0,0,0,8" Padding="14,8">
                     <ui:Button.Icon>
                         <ui:SymbolIcon Symbol="Delete24" />
                     </ui:Button.Icon>
                 </ui:Button>
-            </StackPanel>
-        </Grid>
+            </WrapPanel>
+        </StackPanel>
 
-        <!-- Package List DataGrid -->
-        <ui:DataGrid Grid.Row="1" ItemsSource="{Binding Packages}" AutoGenerateColumns="False" CanUserAddRows="False" GridLinesVisibility="Horizontal">
-            <ui:DataGrid.Columns>
-                <DataGridCheckBoxColumn Header="Select" Binding="{Binding IsSelected, Mode=TwoWay}" Width="80"/>
-                <DataGridTextColumn Header="Display Name" Binding="{Binding DisplayName}" Width="220" FontSize="13" FontWeight="SemiBold" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Package Name" Binding="{Binding PackageName}" Width="*" FontSize="12" IsReadOnly="True"/>
-                <DataGridTextColumn Header="Category" Binding="{Binding Category}" Width="120" FontSize="12" IsReadOnly="True"/>
-                <DataGridCheckBoxColumn Header="Protected" Binding="{Binding IsProtected, Mode=OneWay}" Width="90" IsReadOnly="True"/>
-            </ui:DataGrid.Columns>
-        </ui:DataGrid>
+        <!-- Package List DataGrid with Loading Overlay -->
+        <Grid Grid.Row="1">
+            <ui:DataGrid ItemsSource="{Binding Packages}" AutoGenerateColumns="False" CanUserAddRows="False" GridLinesVisibility="Horizontal">
+                <ui:DataGrid.Columns>
+                    <DataGridCheckBoxColumn Header="Select" Binding="{Binding IsSelected, Mode=TwoWay}" Width="80"/>
+                    <DataGridTextColumn Header="Display Name" Binding="{Binding DisplayName}" Width="220" FontSize="13" FontWeight="SemiBold" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Package Name" Binding="{Binding PackageName}" Width="*" FontSize="12" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Category" Binding="{Binding Category}" Width="120" FontSize="12" IsReadOnly="True"/>
+                    <DataGridCheckBoxColumn Header="Protected" Binding="{Binding IsProtected, Mode=OneWay}" Width="90" IsReadOnly="True"/>
+                </ui:DataGrid.Columns>
+            </ui:DataGrid>
+
+            <!-- Loading Overlay -->
+            <Border Background="#80000000" Visibility="{Binding IsExecuting, Converter={StaticResource BooleanToVisibilityConverter}}" CornerRadius="8">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <ui:ProgressRing IsIndeterminate="True" Width="48" Height="48"/>
+                    <TextBlock Text="{Binding StatusText}" Foreground="White" FontSize="13" Margin="0,12,0,0" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Border>
+        </Grid>
     </Grid>
 </Page>

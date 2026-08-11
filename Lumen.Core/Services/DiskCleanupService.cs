@@ -298,7 +298,7 @@ public class DiskCleanupService : IDiskCleanupService
                 CreateNoWindow = true
             };
             using var proc = Process.Start(psi);
-            proc?.WaitForExit(30000);
+            proc?.WaitForExit();
         }
         catch { }
 

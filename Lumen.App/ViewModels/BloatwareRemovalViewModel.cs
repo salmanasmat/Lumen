@@ -99,6 +99,7 @@ public partial class BloatwareRemovalViewModel : ObservableObject
             }
 
             StatusText = $"Successfully removed {removedCount} bloatware package(s).";
+            await LoadPackagesAsync();
         }
         catch (Exception ex)
         {
@@ -107,7 +108,6 @@ public partial class BloatwareRemovalViewModel : ObservableObject
         finally
         {
             IsExecuting = false;
-            await LoadPackagesAsync();
         }
     }
 }
