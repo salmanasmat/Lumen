@@ -12,7 +12,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <!-- Header Banner -->
@@ -54,31 +54,30 @@
                 </ui:CardControl>
             </UniformGrid>
 
-            <!-- Mapped Network Drives Card & DataGrid -->
-            <ui:CardControl Grid.Row="2" Header="Mapped Network Drives (Logon Delay Inspection)">
-                <ui:CardControl.Icon>
-                    <ui:SymbolIcon Symbol="Folder24" />
-                </ui:CardControl.Icon>
+            <!-- Mapped Network Drives -->
+            <StackPanel Grid.Row="2">
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                    <ui:SymbolIcon Symbol="Folder24" Margin="0,0,8,0"/>
+                    <TextBlock Text="Mapped Network Drives (Logon Delay Inspection)" FontSize="16" FontWeight="SemiBold" Foreground="{DynamicResource TextFillColorPrimaryBrush}" VerticalAlignment="Center"/>
+                </StackPanel>
 
-                <Grid Margin="0,12,0,0">
-                    <ui:DataGrid ItemsSource="{Binding Result.MappedDrives}" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" GridLinesVisibility="Horizontal">
-                        <ui:DataGrid.Columns>
-                            <DataGridTextColumn Header="Drive" Binding="{Binding DriveLetter}" Width="70" FontSize="13" FontWeight="Bold"/>
-                            <DataGridTextColumn Header="Remote Path" Binding="{Binding RemotePath}" Width="*" FontSize="12"/>
-                            <DataGridCheckBoxColumn Header="Reconnect" Binding="{Binding ReconnectAtLogon, Mode=OneWay}" Width="90"/>
-                            <DataGridCheckBoxColumn Header="Reachable" Binding="{Binding IsReachable, Mode=OneWay}" Width="80"/>
-                            <DataGridCheckBoxColumn Header="Hang Risk" Binding="{Binding IsCausingLogonDelay, Mode=OneWay}" Width="80"/>
-                            <DataGridTemplateColumn Header="Fix Action" Width="160">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <ui:Button Content="Disable Reconnect" Command="{Binding DataContext.DisableReconnectCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding}" IsEnabled="{Binding IsCausingLogonDelay}" Padding="10,4"/>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                        </ui:DataGrid.Columns>
-                    </ui:DataGrid>
-                </Grid>
-            </ui:CardControl>
+                <ui:DataGrid ItemsSource="{Binding Result.MappedDrives}" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" GridLinesVisibility="Horizontal" MinHeight="200">
+                    <ui:DataGrid.Columns>
+                        <DataGridTextColumn Header="Drive" Binding="{Binding DriveLetter}" Width="70" FontSize="13" FontWeight="Bold"/>
+                        <DataGridTextColumn Header="Remote Path" Binding="{Binding RemotePath}" Width="*" FontSize="12"/>
+                        <DataGridCheckBoxColumn Header="Reconnect" Binding="{Binding ReconnectAtLogon, Mode=OneWay}" Width="90"/>
+                        <DataGridCheckBoxColumn Header="Reachable" Binding="{Binding IsReachable, Mode=OneWay}" Width="80"/>
+                        <DataGridCheckBoxColumn Header="Hang Risk" Binding="{Binding IsCausingLogonDelay, Mode=OneWay}" Width="80"/>
+                        <DataGridTemplateColumn Header="Fix Action" Width="160">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <ui:Button Content="Disable Reconnect" Command="{Binding DataContext.DisableReconnectCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding}" IsEnabled="{Binding IsCausingLogonDelay}" Padding="10,4"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </ui:DataGrid.Columns>
+                </ui:DataGrid>
+            </StackPanel>
         </Grid>
     </ScrollViewer>
 </Page>
