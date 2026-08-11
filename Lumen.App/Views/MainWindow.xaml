@@ -21,7 +21,7 @@
             <ui:NavigationView.MenuItems>
                 <ui:NavigationViewItem Content="Dashboard" TargetPageType="{x:Type views:DashboardView}">
                     <ui:NavigationViewItem.Icon>
-                        <ui:SymbolIcon Symbol="Dashboard24" />
+                        <ui:SymbolIcon Symbol="Board24" />
                     </ui:NavigationViewItem.Icon>
                 </ui:NavigationViewItem>
 
@@ -55,7 +55,7 @@
                     </ui:NavigationViewItem.Icon>
                 </ui:NavigationViewItem>
 
-                <ui:NavigationViewItem Content="Optimization Profiles" TargetPageType="{x:Type views:ProfilesView}">
+                <ui:NavigationViewItem Content="Profiles" TargetPageType="{x:Type views:ProfilesView}">
                     <ui:NavigationViewItem.Icon>
                         <ui:SymbolIcon Symbol="DocumentCheckmark24" />
                     </ui:NavigationViewItem.Icon>

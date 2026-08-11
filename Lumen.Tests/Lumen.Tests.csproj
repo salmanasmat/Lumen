@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Lumen.Core\Lumen.Core.csproj" />
+    <ProjectReference Include="..\Lumen.App\Lumen.App.csproj" />
   </ItemGroup>
 
 </Project>

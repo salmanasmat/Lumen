@@ -51,7 +51,7 @@
                 <DataGridTemplateColumn Header="Action" Width="120">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <ui:Button Content="Disable" Command="{Binding DataContext.DisableServiceCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding}" IsEnabled="{Binding IsNeverTouch, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=Invert}" Padding="10,4"/>
+                            <ui:Button Content="Disable" Command="{Binding DataContext.DisableServiceCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding}" IsEnabled="{Binding IsNeverTouch, Converter={StaticResource InverseBooleanConverter}}" Padding="10,4"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

@@ -29,7 +29,7 @@
 
                 <StackPanel Grid.Column="1" Orientation="Horizontal">
                     <ui:ProgressRing IsIndeterminate="True" Visibility="{Binding IsScanning, Converter={StaticResource BooleanToVisibilityConverter}}" Height="24" Width="24" Margin="0,0,16,0"/>
-                    <ui:Button Content="Run Full Scan" Command="{Binding RunScanCommand}" IsEnabled="{Binding IsScanning, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=Invert}" Appearance="Primary" Padding="16,8">
+                    <ui:Button Content="Run Full Scan" Command="{Binding RunScanCommand}" IsEnabled="{Binding IsScanning, Converter={StaticResource InverseBooleanConverter}}" Appearance="Primary" Padding="16,8">
                         <ui:Button.Icon>
                             <ui:SymbolIcon Symbol="Play24" />
                         </ui:Button.Icon>
@@ -72,7 +72,7 @@
                 <!-- RAM & CPU Card -->
                 <ui:CardControl Margin="0,0,8,16" Header="System Resources">
                     <ui:CardControl.Icon>
-                        <ui:SymbolIcon Symbol="Cpu24" />
+                        <ui:SymbolIcon Symbol="DeveloperBoard24" />
                     </ui:CardControl.Icon>
 
                     <StackPanel Margin="0,4,0,0">

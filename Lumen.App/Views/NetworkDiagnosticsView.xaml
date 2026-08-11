@@ -65,7 +65,7 @@
             <!-- Mapped Network Drives Card & DataGrid -->
             <ui:CardControl Grid.Row="2" Header="Mapped Network Drives (Logon Delay Inspection)">
                 <ui:CardControl.Icon>
-                    <ui:SymbolIcon Symbol="FolderNetwork24" />
+                    <ui:SymbolIcon Symbol="Folder24" />
                 </ui:CardControl.Icon>
 
                 <Grid Margin="0,12,0,0">

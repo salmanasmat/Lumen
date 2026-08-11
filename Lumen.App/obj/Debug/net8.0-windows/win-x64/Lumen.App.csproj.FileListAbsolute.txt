@@ -499,7 +499,6 @@ D:\Reports\Scripting\Antigravity\Lumen\Lumen.App\obj\Debug\net8.0-windows\win-x6
 D:\Reports\Scripting\Antigravity\Lumen\Lumen.App\obj\Debug\net8.0-windows\win-x64\Views\SettingsView.baml
 D:\Reports\Scripting\Antigravity\Lumen\Lumen.App\obj\Debug\net8.0-windows\win-x64\Views\StartupManagerView.baml
 D:\Reports\Scripting\Antigravity\Lumen\Lumen.App\obj\Debug\net8.0-windows\win-x64\App.baml
-D:\Reports\Scripting\Antigravity\Lumen\Lumen.App\obj\Debug\net8.0-windows\win-x64\MainWindow.g.cs
 D:\Reports\Scripting\Antigravity\Lumen\Lumen.App\obj\Debug\net8.0-windows\win-x64\Views\BloatwareRemovalView.g.cs
 D:\Reports\Scripting\Antigravity\Lumen\Lumen.App\obj\Debug\net8.0-windows\win-x64\Views\DashboardView.g.cs
 D:\Reports\Scripting\Antigravity\Lumen\Lumen.App\obj\Debug\net8.0-windows\win-x64\Views\DiskCleanupView.g.cs
@@ -514,7 +513,6 @@ D:\Reports\Scripting\Antigravity\Lumen\Lumen.App\obj\Debug\net8.0-windows\win-x6
 D:\Reports\Scripting\Antigravity\Lumen\Lumen.App\obj\Debug\net8.0-windows\win-x64\GeneratedInternalTypeHelper.g.cs
 D:\Reports\Scripting\Antigravity\Lumen\Lumen.App\obj\Debug\net8.0-windows\win-x64\Lumen.App_MarkupCompile.cache
 D:\Reports\Scripting\Antigravity\Lumen\Lumen.App\obj\Debug\net8.0-windows\win-x64\Lumen.App_MarkupCompile.lref
-D:\Reports\Scripting\Antigravity\Lumen\Lumen.App\obj\Debug\net8.0-windows\win-x64\MainWindow.baml
 D:\Reports\Scripting\Antigravity\Lumen\Lumen.App\obj\Debug\net8.0-windows\win-x64\Views\MainWindow.baml
 D:\Reports\Scripting\Antigravity\Lumen\Lumen.App\obj\Debug\net8.0-windows\win-x64\Lumen.App.g.resources
 D:\Reports\Scripting\Antigravity\Lumen\Lumen.App\obj\Debug\net8.0-windows\win-x64\Lumen.App.GeneratedMSBuildEditorConfig.editorconfig

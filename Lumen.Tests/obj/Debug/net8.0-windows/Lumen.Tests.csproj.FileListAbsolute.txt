@@ -153,3 +153,8 @@ D:\Reports\Scripting\Antigravity\Lumen\Lumen.Tests\obj\Debug\net8.0-windows\Lume
 D:\Reports\Scripting\Antigravity\Lumen\Lumen.Tests\obj\Debug\net8.0-windows\ref\Lumen.Tests.dll
 D:\Reports\Scripting\Antigravity\Lumen\Lumen.Tests\bin\Debug\net8.0-windows\Wpf.Ui.dll
 D:\Reports\Scripting\Antigravity\Lumen\Lumen.Tests\bin\Debug\net8.0-windows\Wpf.Ui.Abstractions.dll
+D:\Reports\Scripting\Antigravity\Lumen\Lumen.Tests\bin\Debug\net8.0-windows\Lumen.App.deps.json
+D:\Reports\Scripting\Antigravity\Lumen\Lumen.Tests\bin\Debug\net8.0-windows\Lumen.App.runtimeconfig.json
+D:\Reports\Scripting\Antigravity\Lumen\Lumen.Tests\bin\Debug\net8.0-windows\Lumen.App.exe
+D:\Reports\Scripting\Antigravity\Lumen\Lumen.Tests\bin\Debug\net8.0-windows\Lumen.App.dll
+D:\Reports\Scripting\Antigravity\Lumen\Lumen.Tests\bin\Debug\net8.0-windows\Lumen.App.pdb

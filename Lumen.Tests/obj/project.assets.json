@@ -2187,6 +2187,26 @@
           "build/net6.0/xunit.runner.visualstudio.props": {}
         }
       },
+      "Lumen.App/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "CommunityToolkit.Mvvm": "8.4.2",
+          "Lumen.Core": "1.0.0",
+          "Microsoft.Data.Sqlite": "10.0.10",
+          "Microsoft.Extensions.DependencyInjection": "10.0.10",
+          "WPF-UI": "4.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Lumen.App.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Lumen.App.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WPF"
+        ]
+      },
       "Lumen.Core/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
@@ -6705,6 +6725,11 @@
         "xunit.runner.visualstudio.nuspec"
       ]
     },
+    "Lumen.App/1.0.0": {
+      "type": "project",
+      "path": "../Lumen.App/Lumen.App.csproj",
+      "msbuildProject": "../Lumen.App/Lumen.App.csproj"
+    },
     "Lumen.Core/1.0.0": {
       "type": "project",
       "path": "../Lumen.Core/Lumen.Core.csproj",
@@ -6713,6 +6738,7 @@
   },
   "projectFileDependencyGroups": {
     "net8.0-windows": [
+      "Lumen.App >= 1.0.0",
       "Lumen.Core >= 1.0.0",
       "Microsoft.NET.Test.Sdk >= 17.8.0",
       "WPF-UI >= 4.0.0",
@@ -6749,6 +6775,9 @@
           "framework": "net8.0-windows7.0",
           "targetAlias": "net8.0-windows",
           "projectReferences": {
+            "D:\\Reports\\Scripting\\Antigravity\\Lumen\\Lumen.App\\Lumen.App.csproj": {
+              "projectPath": "D:\\Reports\\Scripting\\Antigravity\\Lumen\\Lumen.App\\Lumen.App.csproj"
+            },
             "D:\\Reports\\Scripting\\Antigravity\\Lumen\\Lumen.Core\\Lumen.Core.csproj": {
               "projectPath": "D:\\Reports\\Scripting\\Antigravity\\Lumen\\Lumen.Core\\Lumen.Core.csproj"
             }
