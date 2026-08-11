@@ -1,15 +1,84 @@
-<UserControl x:Class="Lumen.App.Views.HistoryView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:ui="http://schemas.lepoco.org/wpfui/2022/xaml"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Margin="24">
-        <StackPanel VerticalAlignment="Top">
-            <TextBlock Text="{Binding Title}" FontSize="24" FontWeight="SemiBold" Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,0,0,16"/>
-            <TextBlock Text="Placeholder for History &amp; Session Logs." Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
-        </StackPanel>
-    </Grid>
-</UserControl>
+<Page x:Class="Lumen.App.Views.HistoryView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:ui="clr-namespace:Wpf.Ui.Controls;assembly=Wpf.Ui"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="900"
+      Title="History &amp; Logs">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <Grid Margin="24">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Header -->
+            <Grid Grid.Row="0" Margin="0,0,0,20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="Optimization History &amp; Audit Logs" FontSize="24" FontWeight="SemiBold" Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+                    <TextBlock Text="{Binding StatusText}" FontSize="13" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,4,0,0"/>
+                </StackPanel>
+
+                <ui:Button Grid.Column="1" Content="Refresh Logs" Command="{Binding LoadHistoryCommand}" Padding="14,8">
+                    <ui:Button.Icon>
+                        <ui:SymbolIcon Symbol="ArrowSync24" />
+                    </ui:Button.Icon>
+                </ui:Button>
+            </Grid>
+
+            <!-- Sessions List -->
+            <ItemsControl Grid.Row="1" ItemsSource="{Binding Sessions}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <ui:CardControl Margin="0,0,0,16" Header="{Binding Description}">
+                            <ui:CardControl.Icon>
+                                <ui:SymbolIcon Symbol="History24" />
+                            </ui:CardControl.Icon>
+
+                            <StackPanel Margin="0,8,0,0">
+                                <Grid Margin="0,0,0,12">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Timestamp, StringFormat='{}Timestamp: {0:g}'}" FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,0,16,0"/>
+                                        <TextBlock Text="{Binding SystemRestorePointCreated, StringFormat='{}Restore Point: {0}'}" FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+                                    </StackPanel>
+
+                                    <ui:Button Grid.Column="1" Content="Undo Entire Session" Command="{Binding DataContext.UndoSessionCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding}" Padding="12,6"/>
+                                </Grid>
+
+                                <!-- Actions DataGrid inside Session -->
+                                <ui:DataGrid ItemsSource="{Binding Actions}" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" GridLinesVisibility="Horizontal">
+                                    <ui:DataGrid.Columns>
+                                        <DataGridTextColumn Header="Module" Binding="{Binding Module}" Width="100" FontSize="12"/>
+                                        <DataGridTextColumn Header="Target" Binding="{Binding TargetName}" Width="180" FontSize="12" FontWeight="SemiBold"/>
+                                        <DataGridTextColumn Header="Action" Binding="{Binding ActionType}" Width="150" FontSize="12"/>
+                                        <DataGridTextColumn Header="Details" Binding="{Binding Details}" Width="*" FontSize="12"/>
+                                        <DataGridCheckBoxColumn Header="Reversible" Binding="{Binding IsReversible, Mode=OneWay}" Width="90"/>
+                                        <DataGridCheckBoxColumn Header="Undone" Binding="{Binding IsUndone, Mode=OneWay}" Width="80"/>
+                                        <DataGridTemplateColumn Header="Action" Width="100">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <ui:Button Content="Undo" Command="{Binding DataContext.UndoActionCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding}" IsEnabled="{Binding IsReversible}" Padding="8,2"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </ui:DataGrid.Columns>
+                                </ui:DataGrid>
+                            </StackPanel>
+                        </ui:CardControl>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
+    </ScrollViewer>
+</Page>

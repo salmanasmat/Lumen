@@ -1,15 +1,60 @@
-<UserControl x:Class="Lumen.App.Views.SettingsView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:ui="http://schemas.lepoco.org/wpfui/2022/xaml"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+<Page x:Class="Lumen.App.Views.SettingsView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:ui="clr-namespace:Wpf.Ui.Controls;assembly=Wpf.Ui"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="900"
+      Title="Settings">
     <Grid Margin="24">
-        <StackPanel VerticalAlignment="Top">
-            <TextBlock Text="{Binding Title}" FontSize="24" FontWeight="SemiBold" Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,0,0,16"/>
-            <TextBlock Text="Placeholder for Application Settings." Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Grid Grid.Row="0" Margin="0,0,0,20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0">
+                <TextBlock Text="Lumen Configuration &amp; Settings" FontSize="24" FontWeight="SemiBold" Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+                <TextBlock Text="{Binding StatusText}" FontSize="13" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,4,0,0"/>
+            </StackPanel>
+
+            <ui:Button Grid.Column="1" Content="Save Settings" Command="{Binding SaveSettingsCommand}" Appearance="Primary" Padding="16,8">
+                <ui:Button.Icon>
+                    <ui:SymbolIcon Symbol="Save24" />
+                </ui:Button.Icon>
+            </ui:Button>
+        </Grid>
+
+        <StackPanel Grid.Row="1" MaxWidth="600" HorizontalAlignment="Left">
+            <ui:CardControl Header="Network &amp; Server Target" Margin="0,0,0,16">
+                <ui:CardControl.Icon>
+                    <ui:SymbolIcon Symbol="Globe24" />
+                </ui:CardControl.Icon>
+                <StackPanel Margin="0,8,0,0">
+                    <TextBlock Text="Primary Office Server IP / Hostname:" FontSize="13" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,0,0,6"/>
+                    <ui:TextBox Text="{Binding ServerTarget, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" PlaceholderText="e.g. 192.168.1.100 or server.domain.local" Margin="0,0,0,12"/>
+
+                    <TextBlock Text="Monitored Mapped Drive Letter:" FontSize="13" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,0,0,6"/>
+                    <ui:TextBox Text="{Binding MonitoredDrive, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" PlaceholderText="Z:" Width="120" HorizontalAlignment="Left"/>
+                </StackPanel>
+            </ui:CardControl>
+
+            <ui:CardControl Header="Safety &amp; Elevation Settings">
+                <ui:CardControl.Icon>
+                    <ui:SymbolIcon Symbol="ShieldCheckmark24" />
+                </ui:CardControl.Icon>
+                <StackPanel Margin="0,8,0,0">
+                    <ui:ToggleSwitch IsChecked="{Binding AutoCheckSystemRestore, Mode=TwoWay}" OnContent="Check System Restore on Startup" OffContent="Skip System Restore Check"/>
+                    <TextBlock Text="Lumen requires Administrator elevation and will automatically create System Restore points before any mutating operations." FontSize="11" Foreground="{DynamicResource TextFillColorTertiaryBrush}" Margin="0,8,0,0"/>
+                </StackPanel>
+            </ui:CardControl>
         </StackPanel>
     </Grid>
-</UserControl>
+</Page>

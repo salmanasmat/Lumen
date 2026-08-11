@@ -1,11 +1,13 @@
 using System.Windows.Controls;
+using Lumen.App.ViewModels;
 
 namespace Lumen.App.Views;
 
-public partial class DashboardView : UserControl
+public partial class DashboardView : Page
 {
-    public DashboardView()
+    public DashboardView(DashboardViewModel viewModel)
     {
+        DataContext = viewModel;
         InitializeComponent();
     }
 }

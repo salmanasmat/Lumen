@@ -1,0 +1,50 @@
+{
+  "Name": "Office Terminal Workstation",
+  "Description": "Pre-configured profile for office workstations running Chrome, Office, and SmarTerm terminal emulator. Disables non-essential background telemetry, games, and unused services while preserving full network stability.",
+  "IsBuiltIn": true,
+  "DisabledStartupIdentifiers": [
+    "OneDrive",
+    "Adobe Updater",
+    "Spotify",
+    "Cortana",
+    "Skype"
+  ],
+  "RemovedBloatwarePackages": [
+    "Microsoft.XboxApp",
+    "Microsoft.XboxGamingOverlay",
+    "Microsoft.XboxSpeechToTextOverlay",
+    "Microsoft.XboxIdentityProvider",
+    "Microsoft.MicrosoftSolitaireCollection",
+    "Microsoft.3DViewer",
+    "Microsoft.Paint3D",
+    "Microsoft.ZuneMusic",
+    "Microsoft.ZuneVideo",
+    "Microsoft.People",
+    "Microsoft.YourPhone",
+    "Microsoft.SkypeApp",
+    "Microsoft.BingNews",
+    "Microsoft.BingWeather",
+    "Microsoft.MixedReality.Portal",
+    "Microsoft.WindowsFeedbackHub",
+    "Microsoft.GetHelp"
+  ],
+  "SelectedCleanupCategories": [
+    0,
+    1,
+    2,
+    5,
+    6
+  ],
+  "DisabledServices": [
+    "Fax",
+    "RemoteRegistry",
+    "MapsBroker",
+    "XblAuthManager",
+    "XblGameSave",
+    "XboxNetApiSvc",
+    "WerSvc",
+    "DiagTrack",
+    "RetailDemo",
+    "PhoneSvc"
+  ]
+}

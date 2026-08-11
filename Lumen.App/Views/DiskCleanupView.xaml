@@ -1,15 +1,69 @@
-<UserControl x:Class="Lumen.App.Views.DiskCleanupView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:ui="http://schemas.lepoco.org/wpfui/2022/xaml"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+<Page x:Class="Lumen.App.Views.DiskCleanupView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:ui="clr-namespace:Wpf.Ui.Controls;assembly=Wpf.Ui"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="900"
+      Title="Disk Cleanup">
     <Grid Margin="24">
-        <StackPanel VerticalAlignment="Top">
-            <TextBlock Text="{Binding Title}" FontSize="24" FontWeight="SemiBold" Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,0,0,16"/>
-            <TextBlock Text="Placeholder for Disk Cleanup." Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
-        </StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Grid Grid.Row="0" Margin="0,0,0,20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0">
+                <TextBlock Text="System &amp; Cache Disk Cleanup" FontSize="24" FontWeight="SemiBold" Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+                <TextBlock Text="{Binding StatusText}" FontSize="13" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,4,0,0"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                <ui:Button Content="Calculate Space" Command="{Binding CalculateSizesCommand}" Margin="0,0,12,0" Padding="14,8">
+                    <ui:Button.Icon>
+                        <ui:SymbolIcon Symbol="ArrowSync24" />
+                    </ui:Button.Icon>
+                </ui:Button>
+
+                <ui:Button Content="Safe Clean Preset" Command="{Binding SelectSafeCleanPresetCommand}" Margin="0,0,12,0" Padding="14,8">
+                    <ui:Button.Icon>
+                        <ui:SymbolIcon Symbol="ShieldCheckmark24" />
+                    </ui:Button.Icon>
+                </ui:Button>
+
+                <ui:Button Content="Clean Selected" Command="{Binding ExecuteCleanupCommand}" Appearance="Primary" Padding="14,8">
+                    <ui:Button.Icon>
+                        <ui:SymbolIcon Symbol="Broom24" />
+                    </ui:Button.Icon>
+                </ui:Button>
+            </StackPanel>
+        </Grid>
+
+        <!-- Category DataGrid -->
+        <ui:DataGrid Grid.Row="1" ItemsSource="{Binding Categories}" AutoGenerateColumns="False" CanUserAddRows="False" GridLinesVisibility="Horizontal">
+            <ui:DataGrid.Columns>
+                <DataGridCheckBoxColumn Header="Select" Binding="{Binding IsSelected, Mode=TwoWay}" Width="80"/>
+                <DataGridTextColumn Header="Category" Binding="{Binding Name}" Width="250" FontSize="13" FontWeight="SemiBold" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*" FontSize="12" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Reclaimable (MB)" Binding="{Binding SizeMb}" Width="140" FontSize="13" FontWeight="SemiBold" IsReadOnly="True"/>
+                <DataGridCheckBoxColumn Header="High Risk" Binding="{Binding IsHighRisk, Mode=OneWay}" Width="90" IsReadOnly="True"/>
+            </ui:DataGrid.Columns>
+        </ui:DataGrid>
+
+        <!-- Footer Summary -->
+        <Grid Grid.Row="2" Margin="0,16,0,0">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock Text="Total Selected for Deletion: " FontSize="14" Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+                <TextBlock Text="{Binding TotalSelectedMb, StringFormat='{}{0} MB'}" FontSize="15" FontWeight="Bold" Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+            </StackPanel>
+        </Grid>
     </Grid>
-</UserControl>
+</Page>

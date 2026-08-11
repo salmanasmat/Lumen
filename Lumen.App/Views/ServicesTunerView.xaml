@@ -1,15 +1,61 @@
-<UserControl x:Class="Lumen.App.Views.ServicesTunerView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:ui="http://schemas.lepoco.org/wpfui/2022/xaml"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+<Page x:Class="Lumen.App.Views.ServicesTunerView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:ui="clr-namespace:Wpf.Ui.Controls;assembly=Wpf.Ui"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="900"
+      Title="Services Tuner">
     <Grid Margin="24">
-        <StackPanel VerticalAlignment="Top">
-            <TextBlock Text="{Binding Title}" FontSize="24" FontWeight="SemiBold" Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,0,0,16"/>
-            <TextBlock Text="Placeholder for Services Tuner." Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
-        </StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Grid Grid.Row="0" Margin="0,0,0,20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0">
+                <TextBlock Text="Windows Services Tuner" FontSize="24" FontWeight="SemiBold" Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+                <TextBlock Text="{Binding StatusText}" FontSize="13" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,4,0,0"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                <ui:Button Content="Refresh List" Command="{Binding LoadServicesCommand}" Margin="0,0,12,0" Padding="14,8">
+                    <ui:Button.Icon>
+                        <ui:SymbolIcon Symbol="ArrowSync24" />
+                    </ui:Button.Icon>
+                </ui:Button>
+
+                <ui:Button Content="Apply Office-Only Preset" Command="{Binding ApplySafePresetCommand}" Appearance="Primary" Padding="14,8">
+                    <ui:Button.Icon>
+                        <ui:SymbolIcon Symbol="Wrench24" />
+                    </ui:Button.Icon>
+                </ui:Button>
+            </StackPanel>
+        </Grid>
+
+        <!-- DataGrid -->
+        <ui:DataGrid Grid.Row="1" ItemsSource="{Binding Services}" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" GridLinesVisibility="Horizontal">
+            <ui:DataGrid.Columns>
+                <DataGridTextColumn Header="Display Name" Binding="{Binding DisplayName}" Width="260" FontSize="13" FontWeight="SemiBold"/>
+                <DataGridTextColumn Header="Service Name" Binding="{Binding ServiceName}" Width="160" FontSize="12"/>
+                <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="100" FontSize="12"/>
+                <DataGridTextColumn Header="Startup Type" Binding="{Binding CurrentStartType}" Width="120" FontSize="12"/>
+                <DataGridCheckBoxColumn Header="Protected" Binding="{Binding IsNeverTouch, Mode=OneWay}" Width="90"/>
+                <DataGridTemplateColumn Header="Action" Width="120">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ui:Button Content="Disable" Command="{Binding DataContext.DisableServiceCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding}" IsEnabled="{Binding IsNeverTouch, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=Invert}" Padding="10,4"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </ui:DataGrid.Columns>
+        </ui:DataGrid>
     </Grid>
-</UserControl>
+</Page>

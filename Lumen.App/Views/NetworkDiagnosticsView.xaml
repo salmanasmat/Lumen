@@ -1,15 +1,92 @@
-<UserControl x:Class="Lumen.App.Views.NetworkDiagnosticsView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:ui="http://schemas.lepoco.org/wpfui/2022/xaml"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Margin="24">
-        <StackPanel VerticalAlignment="Top">
-            <TextBlock Text="{Binding Title}" FontSize="24" FontWeight="SemiBold" Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,0,0,16"/>
-            <TextBlock Text="Placeholder for Network &amp; Logon Diagnostics." Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
-        </StackPanel>
-    </Grid>
-</UserControl>
+<Page x:Class="Lumen.App.Views.NetworkDiagnosticsView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:ui="clr-namespace:Wpf.Ui.Controls;assembly=Wpf.Ui"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="900"
+      Title="Network Diagnostics">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <Grid Margin="24">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Header Banner -->
+            <Grid Grid.Row="0" Margin="0,0,0,20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="Network &amp; Logon Timeout Diagnostics" FontSize="24" FontWeight="SemiBold" Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+                    <TextBlock Text="{Binding StatusText}" FontSize="13" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,4,0,0"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="Server Target:" VerticalAlignment="Center" Margin="0,0,8,0" Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+                    <ui:TextBox Text="{Binding ServerTarget, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="160" PlaceholderText="IP or Hostname" Margin="0,0,12,0"/>
+                    <ui:Button Content="Run Test" Command="{Binding RunDiagnosticsCommand}" Appearance="Primary" Padding="16,8">
+                        <ui:Button.Icon>
+                            <ui:SymbolIcon Symbol="NetworkCheck24" />
+                        </ui:Button.Icon>
+                    </ui:Button>
+                </StackPanel>
+            </Grid>
+
+            <!-- Diagnostics Metrics Cards -->
+            <UniformGrid Grid.Row="1" Columns="3" Margin="0,0,0,20">
+                <ui:CardControl Margin="0,0,8,0" Header="DNS Resolution Time">
+                    <ui:CardControl.Icon>
+                        <ui:SymbolIcon Symbol="Globe24" />
+                    </ui:CardControl.Icon>
+                    <TextBlock Text="{Binding Result.DnsResolutionTimeMs, StringFormat='{}{0} ms', FallbackValue='--'}" FontSize="16" FontWeight="SemiBold" Margin="0,4,0,0"/>
+                </ui:CardControl>
+
+                <ui:CardControl Margin="4,0,4,0" Header="Server Ping Latency">
+                    <ui:CardControl.Icon>
+                        <ui:SymbolIcon Symbol="Pulse24" />
+                    </ui:CardControl.Icon>
+                    <TextBlock Text="{Binding Result.PingAverageLatencyMs, StringFormat='{}{0} ms', FallbackValue='--'}" FontSize="16" FontWeight="SemiBold" Margin="0,4,0,0"/>
+                </ui:CardControl>
+
+                <ui:CardControl Margin="8,0,0,0" Header="Packet Loss">
+                    <ui:CardControl.Icon>
+                        <ui:SymbolIcon Symbol="DismissSquare24" />
+                    </ui:CardControl.Icon>
+                    <TextBlock Text="{Binding Result.PingPacketLossPercent, StringFormat='{}{0}%', FallbackValue='--'}" FontSize="16" FontWeight="SemiBold" Margin="0,4,0,0"/>
+                </ui:CardControl>
+            </UniformGrid>
+
+            <!-- Mapped Network Drives Card & DataGrid -->
+            <ui:CardControl Grid.Row="2" Header="Mapped Network Drives (Logon Delay Inspection)">
+                <ui:CardControl.Icon>
+                    <ui:SymbolIcon Symbol="FolderNetwork24" />
+                </ui:CardControl.Icon>
+
+                <Grid Margin="0,12,0,0">
+                    <ui:DataGrid ItemsSource="{Binding Result.MappedDrives}" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" GridLinesVisibility="Horizontal">
+                        <ui:DataGrid.Columns>
+                            <DataGridTextColumn Header="Drive" Binding="{Binding DriveLetter}" Width="80" FontSize="13" FontWeight="Bold"/>
+                            <DataGridTextColumn Header="Remote Network Path" Binding="{Binding RemotePath}" Width="*" FontSize="12"/>
+                            <DataGridCheckBoxColumn Header="Reconnect At Logon" Binding="{Binding ReconnectAtLogon, Mode=OneWay}" Width="150"/>
+                            <DataGridCheckBoxColumn Header="Reachable Now" Binding="{Binding IsReachable, Mode=OneWay}" Width="120"/>
+                            <DataGridCheckBoxColumn Header="Logon Hang Risk" Binding="{Binding IsCausingLogonDelay, Mode=OneWay}" Width="130"/>
+                            <DataGridTemplateColumn Header="Fix Action" Width="140">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <ui:Button Content="Disable Reconnect" Command="{Binding DataContext.DisableReconnectCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding}" IsEnabled="{Binding IsCausingLogonDelay}" Padding="10,4"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </ui:DataGrid.Columns>
+                    </ui:DataGrid>
+                </Grid>
+            </ui:CardControl>
+        </Grid>
+    </ScrollViewer>
+</Page>

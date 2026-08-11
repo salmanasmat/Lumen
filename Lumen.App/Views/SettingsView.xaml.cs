@@ -1,11 +1,13 @@
 using System.Windows.Controls;
+using Lumen.App.ViewModels;
 
 namespace Lumen.App.Views;
 
-public partial class SettingsView : UserControl
+public partial class SettingsView : Page
 {
-    public SettingsView()
+    public SettingsView(SettingsViewModel viewModel)
     {
+        DataContext = viewModel;
         InitializeComponent();
     }
 }

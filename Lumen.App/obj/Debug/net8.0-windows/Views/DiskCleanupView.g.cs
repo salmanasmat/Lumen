@@ -29,6 +29,7 @@ using System.Windows.Media.TextFormatting;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Shell;
+using Wpf.Ui.Controls;
 
 
 namespace Lumen.App.Views {
