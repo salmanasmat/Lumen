@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
 using Wpf.Ui.Appearance;
-using Wpf.Ui.Controls;
 using Lumen.Core.Data;
 using Lumen.Core.Interfaces;
 using Lumen.Core.Services;
@@ -96,9 +95,6 @@ public partial class App : Application
 
     private void ConfigureServices(IServiceCollection services)
     {
-        // WPF-UI Infrastructure
-        services.AddSingleton<INavigationViewPageProvider, PageService>();
-
         // Core Services
         services.AddSingleton<SqliteDataStore>();
         services.AddSingleton<IRestorePointService, RestorePointService>();

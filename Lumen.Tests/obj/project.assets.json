@@ -2054,6 +2054,38 @@
           }
         }
       },
+      "WPF-UI/4.0.0": {
+        "type": "package",
+        "dependencies": {
+          "WPF-UI.Abstractions": "4.0.0"
+        },
+        "compile": {
+          "lib/net8.0-windows7.0/Wpf.Ui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0-windows7.0/Wpf.Ui.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WPF"
+        ]
+      },
+      "WPF-UI.Abstractions/4.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/Wpf.Ui.Abstractions.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/Wpf.Ui.Abstractions.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
       "xunit/2.5.3": {
         "type": "package",
         "dependencies": {
@@ -6460,6 +6492,77 @@
         "tsnew48.png"
       ]
     },
+    "WPF-UI/4.0.0": {
+      "sha512": "sbYXPpdZttHcmGPLfHDXDP6Q1/Dk0FubREyOj7QYTsFNwIXr2smt4o0WfUWPED586M63982DqUDhUvUSTLjpZA==",
+      "type": "package",
+      "path": "wpf-ui/4.0.0",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.md",
+        "README.md",
+        "ThirdPartyNotices.txt",
+        "lib/net462/Wpf.Ui.dll",
+        "lib/net462/Wpf.Ui.pdb",
+        "lib/net462/Wpf.Ui.xml",
+        "lib/net472/Wpf.Ui.dll",
+        "lib/net472/Wpf.Ui.pdb",
+        "lib/net472/Wpf.Ui.xml",
+        "lib/net481/Wpf.Ui.dll",
+        "lib/net481/Wpf.Ui.pdb",
+        "lib/net481/Wpf.Ui.xml",
+        "lib/net6.0-windows7.0/Wpf.Ui.dll",
+        "lib/net6.0-windows7.0/Wpf.Ui.pdb",
+        "lib/net6.0-windows7.0/Wpf.Ui.xml",
+        "lib/net8.0-windows7.0/Wpf.Ui.dll",
+        "lib/net8.0-windows7.0/Wpf.Ui.pdb",
+        "lib/net8.0-windows7.0/Wpf.Ui.xml",
+        "lib/net9.0-windows7.0/Wpf.Ui.dll",
+        "lib/net9.0-windows7.0/Wpf.Ui.pdb",
+        "lib/net9.0-windows7.0/Wpf.Ui.xml",
+        "tools/VisualStudioToolsManifest.xml",
+        "wpf-ui.4.0.0.nupkg.sha512",
+        "wpf-ui.nuspec"
+      ]
+    },
+    "WPF-UI.Abstractions/4.0.0": {
+      "sha512": "VXeSxHhlWq8fwapzOdhKEPg924VyVTKrs4UtvBJsDT4Rh6jdauxTGrTCyfyj2EWgN+9oP7o/2LDkQ5VGX3DcmA==",
+      "type": "package",
+      "path": "wpf-ui.abstractions/4.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.md",
+        "README.md",
+        "ThirdPartyNotices.txt",
+        "lib/net462/Wpf.Ui.Abstractions.dll",
+        "lib/net462/Wpf.Ui.Abstractions.pdb",
+        "lib/net462/Wpf.Ui.Abstractions.xml",
+        "lib/net472/Wpf.Ui.Abstractions.dll",
+        "lib/net472/Wpf.Ui.Abstractions.pdb",
+        "lib/net472/Wpf.Ui.Abstractions.xml",
+        "lib/net6.0/Wpf.Ui.Abstractions.dll",
+        "lib/net6.0/Wpf.Ui.Abstractions.pdb",
+        "lib/net6.0/Wpf.Ui.Abstractions.xml",
+        "lib/net8.0/Wpf.Ui.Abstractions.dll",
+        "lib/net8.0/Wpf.Ui.Abstractions.pdb",
+        "lib/net8.0/Wpf.Ui.Abstractions.xml",
+        "lib/net9.0/Wpf.Ui.Abstractions.dll",
+        "lib/net9.0/Wpf.Ui.Abstractions.pdb",
+        "lib/net9.0/Wpf.Ui.Abstractions.xml",
+        "lib/netstandard2.0/Wpf.Ui.Abstractions.dll",
+        "lib/netstandard2.0/Wpf.Ui.Abstractions.pdb",
+        "lib/netstandard2.0/Wpf.Ui.Abstractions.xml",
+        "lib/netstandard2.1/Wpf.Ui.Abstractions.dll",
+        "lib/netstandard2.1/Wpf.Ui.Abstractions.pdb",
+        "lib/netstandard2.1/Wpf.Ui.Abstractions.xml",
+        "wpf-ui.abstractions.4.0.0.nupkg.sha512",
+        "wpf-ui.abstractions.nuspec"
+      ]
+    },
     "xunit/2.5.3": {
       "sha512": "VxYDiWSwrLxOJ3UEN+ZPrBybB0SFShQ1E6PjT65VdoKCJhorgerFznThjSwawRH/WAip73YnucDVsE8WRj/8KQ==",
       "type": "package",
@@ -6612,6 +6715,7 @@
     "net8.0-windows": [
       "Lumen.Core >= 1.0.0",
       "Microsoft.NET.Test.Sdk >= 17.8.0",
+      "WPF-UI >= 4.0.0",
       "coverlet.collector >= 6.0.0",
       "xunit >= 2.5.3",
       "xunit.runner.visualstudio >= 2.5.3"
@@ -6672,6 +6776,10 @@
             "target": "Package",
             "version": "[17.8.0, )"
           },
+          "WPF-UI": {
+            "target": "Package",
+            "version": "[4.0.0, )"
+          },
           "coverlet.collector": {
             "target": "Package",
             "version": "[6.0.0, )"
@@ -6699,6 +6807,9 @@
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
+          },
+          "Microsoft.WindowsDesktop.App.WPF": {
+            "privateAssets": "none"
           }
         },
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.302/PortableRuntimeIdentifierGraph.json"

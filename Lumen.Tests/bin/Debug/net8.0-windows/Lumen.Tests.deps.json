@@ -10,6 +10,7 @@
         "dependencies": {
           "Lumen.Core": "1.0.0",
           "Microsoft.NET.Test.Sdk": "17.8.0",
+          "WPF-UI": "4.0.0",
           "xunit": "2.5.3"
         },
         "runtime": {
@@ -601,6 +602,25 @@
           }
         }
       },
+      "WPF-UI/4.0.0": {
+        "dependencies": {
+          "WPF-UI.Abstractions": "4.0.0"
+        },
+        "runtime": {
+          "lib/net8.0-windows7.0/Wpf.Ui.dll": {
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "4.0.0.0"
+          }
+        }
+      },
+      "WPF-UI.Abstractions/4.0.0": {
+        "runtime": {
+          "lib/net8.0/Wpf.Ui.Abstractions.dll": {
+            "assemblyVersion": "4.0.0.0",
+            "fileVersion": "4.0.0.0"
+          }
+        }
+      },
       "xunit/2.5.3": {
         "dependencies": {
           "xunit.assert": "2.5.3",
@@ -814,6 +834,20 @@
       "sha512": "sha512-glpAb3VrwfdAofp6PIyAzL0ZeTV7XUJ8muu0oZoTeyU5jtk2sMJ6QAMRRuFbovcaj+SBJiEUGklxIWOqQoxshA==",
       "path": "taskscheduler/2.12.2",
       "hashPath": "taskscheduler.2.12.2.nupkg.sha512"
+    },
+    "WPF-UI/4.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-sbYXPpdZttHcmGPLfHDXDP6Q1/Dk0FubREyOj7QYTsFNwIXr2smt4o0WfUWPED586M63982DqUDhUvUSTLjpZA==",
+      "path": "wpf-ui/4.0.0",
+      "hashPath": "wpf-ui.4.0.0.nupkg.sha512"
+    },
+    "WPF-UI.Abstractions/4.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-VXeSxHhlWq8fwapzOdhKEPg924VyVTKrs4UtvBJsDT4Rh6jdauxTGrTCyfyj2EWgN+9oP7o/2LDkQ5VGX3DcmA==",
+      "path": "wpf-ui.abstractions/4.0.0",
+      "hashPath": "wpf-ui.abstractions.4.0.0.nupkg.sha512"
     },
     "xunit/2.5.3": {
       "type": "package",

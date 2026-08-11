@@ -145,6 +145,10 @@
               "target": "Package",
               "version": "[17.8.0, )"
             },
+            "WPF-UI": {
+              "target": "Package",
+              "version": "[4.0.0, )"
+            },
             "coverlet.collector": {
               "target": "Package",
               "version": "[6.0.0, )"
@@ -172,6 +176,9 @@
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
+            },
+            "Microsoft.WindowsDesktop.App.WPF": {
+              "privateAssets": "none"
             }
           },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.302/PortableRuntimeIdentifierGraph.json"

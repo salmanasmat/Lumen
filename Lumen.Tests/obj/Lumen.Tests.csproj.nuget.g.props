@@ -21,5 +21,6 @@
   </ImportGroup>
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <Pkgxunit_analyzers Condition=" '$(Pkgxunit_analyzers)' == '' ">C:\Users\Lenovo\.nuget\packages\xunit.analyzers\1.4.0</Pkgxunit_analyzers>
+    <PkgWPF-UI Condition=" '$(PkgWPF-UI)' == '' ">C:\Users\Lenovo\.nuget\packages\wpf-ui\4.0.0</PkgWPF-UI>
   </PropertyGroup>
 </Project>

@@ -151,3 +151,5 @@ D:\Reports\Scripting\Antigravity\Lumen\Lumen.Tests\obj\Debug\net8.0-windows\refi
 D:\Reports\Scripting\Antigravity\Lumen\Lumen.Tests\obj\Debug\net8.0-windows\Lumen.Tests.pdb
 D:\Reports\Scripting\Antigravity\Lumen\Lumen.Tests\obj\Debug\net8.0-windows\Lumen.Tests.genruntimeconfig.cache
 D:\Reports\Scripting\Antigravity\Lumen\Lumen.Tests\obj\Debug\net8.0-windows\ref\Lumen.Tests.dll
+D:\Reports\Scripting\Antigravity\Lumen\Lumen.Tests\bin\Debug\net8.0-windows\Wpf.Ui.dll
+D:\Reports\Scripting\Antigravity\Lumen\Lumen.Tests\bin\Debug\net8.0-windows\Wpf.Ui.Abstractions.dll
