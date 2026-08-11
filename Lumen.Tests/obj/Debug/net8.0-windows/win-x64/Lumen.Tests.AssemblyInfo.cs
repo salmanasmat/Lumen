@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Lumen.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c1f37a2c58152949d7261f1c78efbce491949c5c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a75fb05ba3b81513e609340546e1f546638aa952")]
 [assembly: System.Reflection.AssemblyProductAttribute("Lumen.Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Lumen.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

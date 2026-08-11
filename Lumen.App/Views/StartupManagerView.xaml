@@ -13,32 +13,22 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Header -->
-        <Grid Grid.Row="0" Margin="0,0,0,20">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-
-            <StackPanel Grid.Column="0">
-                <TextBlock Text="Startup Application &amp; Task Manager" FontSize="24" FontWeight="SemiBold" Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
-                <TextBlock Text="{Binding StatusText}" FontSize="13" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,4,0,0"/>
-            </StackPanel>
-
-            <StackPanel Grid.Column="1" Orientation="Horizontal">
-                <ui:Button Content="Refresh List" Command="{Binding LoadEntriesCommand}" Margin="0,0,12,0" Padding="14,8">
+        <StackPanel Grid.Row="0" Margin="0,0,0,20">
+            <TextBlock Text="Startup Application &amp; Task Manager" FontSize="24" FontWeight="SemiBold" Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+            <TextBlock Text="{Binding StatusText}" FontSize="13" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,4,0,12"/>
+            <WrapPanel Orientation="Horizontal">
+                <ui:Button Content="Refresh List" Command="{Binding LoadEntriesCommand}" Margin="0,0,8,8" Padding="14,8">
                     <ui:Button.Icon>
                         <ui:SymbolIcon Symbol="ArrowSync24" />
                     </ui:Button.Icon>
                 </ui:Button>
-
-                <ui:Button Content="Disable All Low-Risk Items" Command="{Binding DisableAllSafeCommand}" Appearance="Primary" Padding="14,8">
+                <ui:Button Content="Disable All Low-Risk Items" Command="{Binding DisableAllSafeCommand}" Appearance="Primary" Margin="0,0,0,8" Padding="14,8">
                     <ui:Button.Icon>
                         <ui:SymbolIcon Symbol="DismissCircle24" />
                     </ui:Button.Icon>
                 </ui:Button>
-            </StackPanel>
-        </Grid>
+            </WrapPanel>
+        </StackPanel>
 
         <!-- DataGrid -->
         <ui:DataGrid Grid.Row="1" ItemsSource="{Binding Entries}" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" GridLinesVisibility="Horizontal">
@@ -47,13 +37,13 @@
                 <DataGridTextColumn Header="Publisher / Path" Binding="{Binding PublisherOrPath}" Width="*" FontSize="12"/>
                 <DataGridTextColumn Header="Source" Binding="{Binding Source}" Width="150" FontSize="12"/>
                 <DataGridTextColumn Header="Risk Level" Binding="{Binding Risk}" Width="100" FontSize="12"/>
-                <DataGridTemplateColumn Header="Action" Width="120">
+                <DataGridTemplateColumn Header="Action" Width="160">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <ui:ToggleSwitch IsChecked="{Binding IsEnabled, Mode=OneWay}"
                                              Command="{Binding DataContext.ToggleEntryCommand, RelativeSource={RelativeSource AncestorType=Page}}"
                                              CommandParameter="{Binding}"
-                                             OnContent="Enabled" OffContent="Disabled"/>
+                                             OnContent="On" OffContent="Off"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

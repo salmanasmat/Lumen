@@ -53,19 +53,19 @@
                                         <TextBlock Text="{Binding SystemRestorePointCreated, StringFormat='{}Restore Point: {0}'}" FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
                                     </StackPanel>
 
-                                    <ui:Button Grid.Column="1" Content="Undo Entire Session" Command="{Binding DataContext.UndoSessionCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding}" Padding="12,6"/>
+                                    <ui:Button Grid.Column="1" Content="Undo Session" Command="{Binding DataContext.UndoSessionCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding}" Margin="12,0,0,0" Padding="12,6"/>
                                 </Grid>
 
                                 <!-- Actions DataGrid inside Session -->
                                 <ui:DataGrid ItemsSource="{Binding Actions}" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" GridLinesVisibility="Horizontal">
                                     <ui:DataGrid.Columns>
-                                        <DataGridTextColumn Header="Module" Binding="{Binding Module}" Width="100" FontSize="12"/>
-                                        <DataGridTextColumn Header="Target" Binding="{Binding TargetName}" Width="180" FontSize="12" FontWeight="SemiBold"/>
-                                        <DataGridTextColumn Header="Action" Binding="{Binding ActionType}" Width="150" FontSize="12"/>
+                                        <DataGridTextColumn Header="Module" Binding="{Binding Module}" Width="90" FontSize="12"/>
+                                        <DataGridTextColumn Header="Target" Binding="{Binding TargetName}" Width="150" FontSize="12" FontWeight="SemiBold"/>
+                                        <DataGridTextColumn Header="Action" Binding="{Binding ActionType}" Width="120" FontSize="12"/>
                                         <DataGridTextColumn Header="Details" Binding="{Binding Details}" Width="*" FontSize="12"/>
-                                        <DataGridCheckBoxColumn Header="Reversible" Binding="{Binding IsReversible, Mode=OneWay}" Width="90"/>
-                                        <DataGridCheckBoxColumn Header="Undone" Binding="{Binding IsUndone, Mode=OneWay}" Width="80"/>
-                                        <DataGridTemplateColumn Header="Action" Width="100">
+                                        <DataGridCheckBoxColumn Header="Rev." Binding="{Binding IsReversible, Mode=OneWay}" Width="60"/>
+                                        <DataGridCheckBoxColumn Header="Undone" Binding="{Binding IsUndone, Mode=OneWay}" Width="60"/>
+                                        <DataGridTemplateColumn Header="" Width="80">
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <ui:Button Content="Undo" Command="{Binding DataContext.UndoActionCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding}" IsEnabled="{Binding IsReversible}" Padding="8,2"/>

@@ -16,27 +16,19 @@
             </Grid.RowDefinitions>
 
             <!-- Header Banner -->
-            <Grid Grid.Row="0" Margin="0,0,0,20">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-
-                <StackPanel Grid.Column="0">
-                    <TextBlock Text="Network &amp; Logon Timeout Diagnostics" FontSize="24" FontWeight="SemiBold" Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
-                    <TextBlock Text="{Binding StatusText}" FontSize="13" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,4,0,0"/>
-                </StackPanel>
-
-                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
-                    <TextBlock Text="Server Target:" VerticalAlignment="Center" Margin="0,0,8,0" Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
-                    <ui:TextBox Text="{Binding ServerTarget, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="160" PlaceholderText="IP or Hostname" Margin="0,0,12,0"/>
-                    <ui:Button Content="Run Test" Command="{Binding RunDiagnosticsCommand}" Appearance="Primary" Padding="16,8">
+            <StackPanel Grid.Row="0" Margin="0,0,0,20">
+                <TextBlock Text="Network &amp; Logon Timeout Diagnostics" FontSize="24" FontWeight="SemiBold" Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+                <TextBlock Text="{Binding StatusText}" FontSize="13" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,4,0,12"/>
+                <WrapPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="Server Target:" VerticalAlignment="Center" Margin="0,0,8,8" Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+                    <ui:TextBox Text="{Binding ServerTarget, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" PlaceholderText="IP or Hostname" Margin="0,0,12,8"/>
+                    <ui:Button Content="Run Test" Command="{Binding RunDiagnosticsCommand}" Appearance="Primary" Margin="0,0,0,8" Padding="16,8">
                         <ui:Button.Icon>
                             <ui:SymbolIcon Symbol="NetworkCheck24" />
                         </ui:Button.Icon>
                     </ui:Button>
-                </StackPanel>
-            </Grid>
+                </WrapPanel>
+            </StackPanel>
 
             <!-- Diagnostics Metrics Cards -->
             <UniformGrid Grid.Row="1" Columns="3" Margin="0,0,0,20">
@@ -71,12 +63,12 @@
                 <Grid Margin="0,12,0,0">
                     <ui:DataGrid ItemsSource="{Binding Result.MappedDrives}" AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" GridLinesVisibility="Horizontal">
                         <ui:DataGrid.Columns>
-                            <DataGridTextColumn Header="Drive" Binding="{Binding DriveLetter}" Width="80" FontSize="13" FontWeight="Bold"/>
-                            <DataGridTextColumn Header="Remote Network Path" Binding="{Binding RemotePath}" Width="*" FontSize="12"/>
-                            <DataGridCheckBoxColumn Header="Reconnect At Logon" Binding="{Binding ReconnectAtLogon, Mode=OneWay}" Width="150"/>
-                            <DataGridCheckBoxColumn Header="Reachable Now" Binding="{Binding IsReachable, Mode=OneWay}" Width="120"/>
-                            <DataGridCheckBoxColumn Header="Logon Hang Risk" Binding="{Binding IsCausingLogonDelay, Mode=OneWay}" Width="130"/>
-                            <DataGridTemplateColumn Header="Fix Action" Width="140">
+                            <DataGridTextColumn Header="Drive" Binding="{Binding DriveLetter}" Width="70" FontSize="13" FontWeight="Bold"/>
+                            <DataGridTextColumn Header="Remote Path" Binding="{Binding RemotePath}" Width="*" FontSize="12"/>
+                            <DataGridCheckBoxColumn Header="Reconnect" Binding="{Binding ReconnectAtLogon, Mode=OneWay}" Width="90"/>
+                            <DataGridCheckBoxColumn Header="Reachable" Binding="{Binding IsReachable, Mode=OneWay}" Width="80"/>
+                            <DataGridCheckBoxColumn Header="Hang Risk" Binding="{Binding IsCausingLogonDelay, Mode=OneWay}" Width="80"/>
+                            <DataGridTemplateColumn Header="Fix Action" Width="160">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <ui:Button Content="Disable Reconnect" Command="{Binding DataContext.DisableReconnectCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding}" IsEnabled="{Binding IsCausingLogonDelay}" Padding="10,4"/>

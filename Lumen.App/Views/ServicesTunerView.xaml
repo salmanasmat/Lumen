@@ -13,32 +13,22 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Header -->
-        <Grid Grid.Row="0" Margin="0,0,0,20">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-
-            <StackPanel Grid.Column="0">
-                <TextBlock Text="Windows Services Tuner" FontSize="24" FontWeight="SemiBold" Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
-                <TextBlock Text="{Binding StatusText}" FontSize="13" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,4,0,0"/>
-            </StackPanel>
-
-            <StackPanel Grid.Column="1" Orientation="Horizontal">
-                <ui:Button Content="Refresh List" Command="{Binding LoadServicesCommand}" Margin="0,0,12,0" Padding="14,8">
+        <StackPanel Grid.Row="0" Margin="0,0,0,20">
+            <TextBlock Text="Windows Services Tuner" FontSize="24" FontWeight="SemiBold" Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+            <TextBlock Text="{Binding StatusText}" FontSize="13" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,4,0,12"/>
+            <WrapPanel Orientation="Horizontal">
+                <ui:Button Content="Refresh List" Command="{Binding LoadServicesCommand}" Margin="0,0,8,8" Padding="14,8">
                     <ui:Button.Icon>
                         <ui:SymbolIcon Symbol="ArrowSync24" />
                     </ui:Button.Icon>
                 </ui:Button>
-
-                <ui:Button Content="Apply Office-Only Preset" Command="{Binding ApplySafePresetCommand}" Appearance="Primary" Padding="14,8">
+                <ui:Button Content="Apply Office-Only Preset" Command="{Binding ApplySafePresetCommand}" Appearance="Primary" Margin="0,0,0,8" Padding="14,8">
                     <ui:Button.Icon>
                         <ui:SymbolIcon Symbol="Wrench24" />
                     </ui:Button.Icon>
                 </ui:Button>
-            </StackPanel>
-        </Grid>
+            </WrapPanel>
+        </StackPanel>
 
         <!-- DataGrid with Loading Overlay -->
         <Grid Grid.Row="1">
