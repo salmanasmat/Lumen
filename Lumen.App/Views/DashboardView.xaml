@@ -3,13 +3,121 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:ui="http://schemas.lepoco.org/wpfui/2022/xaml"
+             xmlns:ui="clr-namespace:Wpf.Ui.Controls;assembly=Wpf.Ui"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Margin="24">
-        <StackPanel VerticalAlignment="Top">
-            <TextBlock Text="{Binding Title}" FontSize="24" FontWeight="SemiBold" Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0,0,0,16"/>
-            <TextBlock Text="Placeholder for Diagnostics Dashboard scorecard and scan trigger." Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
-        </StackPanel>
-    </Grid>
+             d:DesignHeight="700" d:DesignWidth="900">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <Grid Margin="24">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Header Banner -->
+            <Grid Grid.Row="0" Margin="0,0,0,20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="System Diagnostics &amp; Health Scorecard" FontSize="24" FontWeight="SemiBold" Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+                    <TextBlock Text="{Binding StatusText}" FontSize="13" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,4,0,0"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                    <ui:ProgressRing IsIndeterminate="True" Visibility="{Binding IsScanning, Converter={StaticResource BooleanToVisibilityConverter}}" Height="24" Width="24" Margin="0,0,16,0"/>
+                    <ui:Button Content="Run Full Scan" Icon="{ui:SymbolIcon Symbol=Play24}" Command="{Binding RunScanCommand}" IsEnabled="{Binding IsScanning, Converter={StaticResource BooleanToVisibilityConverter}, ConverterParameter=Invert}" Appearance="Primary" Padding="16,8"/>
+                </StackPanel>
+            </Grid>
+
+            <!-- Diagnostic Cards Grid -->
+            <UniformGrid Grid.Row="1" Columns="2" Margin="0,0,0,16">
+                <!-- Boot Performance Card -->
+                <ui:CardControl Margin="0,0,8,16" Header="Boot Performance">
+                    <ui:CardControl.Icon>
+                        <ui:SymbolIcon Symbol="Timer24" />
+                    </ui:CardControl.Icon>
+
+                    <StackPanel Margin="0,4,0,0">
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
+                            <TextBlock Text="Avg Boot Duration: " FontSize="13" Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+                            <TextBlock Text="{Binding Snapshot.AverageBootTimeSeconds, StringFormat='{}{0}s', FallbackValue='Not Scanned'}" FontSize="14" FontWeight="SemiBold"/>
+                        </StackPanel>
+                        <TextBlock Text="Read from Event ID 100 (Diagnostics-Performance)" FontSize="11" Foreground="{DynamicResource TextFillColorTertiaryBrush}"/>
+                    </StackPanel>
+                </ui:CardControl>
+
+                <!-- Disk Hardware Card -->
+                <ui:CardControl Margin="8,0,0,16" Header="Physical Disk Media">
+                    <ui:CardControl.Icon>
+                        <ui:SymbolIcon Symbol="HardDrive24" />
+                    </ui:CardControl.Icon>
+
+                    <StackPanel Margin="0,4,0,0">
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,6">
+                            <TextBlock Text="Storage Disks Detected: " FontSize="13" Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+                            <TextBlock Text="{Binding Snapshot.Disks.Count, FallbackValue='0'}" FontSize="14" FontWeight="SemiBold"/>
+                        </StackPanel>
+                        <TextBlock Text="Checks WMI MSFT_PhysicalDisk media type (SSD/HDD)" FontSize="11" Foreground="{DynamicResource TextFillColorTertiaryBrush}"/>
+                    </StackPanel>
+                </ui:CardControl>
+
+                <!-- RAM & CPU Card -->
+                <ui:CardControl Margin="0,0,8,16" Header="System Resources">
+                    <ui:CardControl.Icon>
+                        <ui:SymbolIcon Symbol="Cpu24" />
+                    </ui:CardControl.Icon>
+
+                    <StackPanel Margin="0,4,0,0">
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
+                            <TextBlock Text="RAM: " FontSize="13" Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+                            <TextBlock Text="{Binding Snapshot.AvailableRamGb, StringFormat='{}{0} GB Free', FallbackValue='--'}" FontSize="13" FontWeight="SemiBold"/>
+                            <TextBlock Text="{Binding Snapshot.TotalRamGb, StringFormat='{} of {0} GB Total', FallbackValue='--'}" FontSize="13" Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+                        </StackPanel>
+                        <TextBlock Text="{Binding Snapshot.CpuName, FallbackValue='CPU Information'}" FontSize="12" Foreground="{DynamicResource TextFillColorTertiaryBrush}"/>
+                    </StackPanel>
+                </ui:CardControl>
+
+                <!-- System Disk Space Card -->
+                <ui:CardControl Margin="8,0,0,16" Header="System Volume (C:)">
+                    <ui:CardControl.Icon>
+                        <ui:SymbolIcon Symbol="Storage24" />
+                    </ui:CardControl.Icon>
+
+                    <StackPanel Margin="0,4,0,0">
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
+                            <TextBlock Text="Free Space: " FontSize="13" Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+                            <TextBlock Text="{Binding Snapshot.SystemDriveFreeSpaceGb, StringFormat='{}{0} GB', FallbackValue='--'}" FontSize="13" FontWeight="SemiBold"/>
+                            <TextBlock Text="{Binding Snapshot.SystemDriveFreePercent, StringFormat='{} ({0}%)', FallbackValue='--'}" FontSize="13" Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+                        </StackPanel>
+                        <TextBlock Text="{Binding Snapshot.WinSxSSizeGb, StringFormat='{}WinSxS Store Estimate: ~{0} GB', FallbackValue='WinSxS: --'}" FontSize="11" Foreground="{DynamicResource TextFillColorTertiaryBrush}"/>
+                    </StackPanel>
+                </ui:CardControl>
+            </UniformGrid>
+
+            <!-- Detailed Overview Card -->
+            <ui:CardControl Grid.Row="2" Header="Security &amp; Update Status">
+                <ui:CardControl.Icon>
+                    <ui:SymbolIcon Symbol="ShieldCheckmark24" />
+                </ui:CardControl.Icon>
+
+                <StackPanel Margin="0,8,0,0">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                        <TextBlock Text="Antivirus Product: " FontWeight="SemiBold" Width="140"/>
+                        <TextBlock Text="{Binding Snapshot.AntivirusProductName, FallbackValue='Not Scanned'}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                        <TextBlock Text="Pending Reboot: " FontWeight="SemiBold" Width="140"/>
+                        <TextBlock Text="{Binding Snapshot.PendingReboot, FallbackValue='False'}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Windows.old Present: " FontWeight="SemiBold" Width="140"/>
+                        <TextBlock Text="{Binding Snapshot.HasWindowsOld, FallbackValue='False'}"/>
+                    </StackPanel>
+                </StackPanel>
+            </ui:CardControl>
+        </Grid>
+    </ScrollViewer>
 </UserControl>

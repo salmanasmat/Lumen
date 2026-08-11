@@ -1,0 +1,13 @@
+D:\Reports\Scripting\Antigravity\Lumen\Lumen.Core\bin\Debug\net8.0-windows\Lumen.Core.deps.json
+D:\Reports\Scripting\Antigravity\Lumen\Lumen.Core\bin\Debug\net8.0-windows\Lumen.Core.dll
+D:\Reports\Scripting\Antigravity\Lumen\Lumen.Core\bin\Debug\net8.0-windows\Lumen.Core.pdb
+D:\Reports\Scripting\Antigravity\Lumen\Lumen.Core\obj\Debug\net8.0-windows\Lumen.Core.csproj.AssemblyReference.cache
+D:\Reports\Scripting\Antigravity\Lumen\Lumen.Core\obj\Debug\net8.0-windows\Lumen.Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\Reports\Scripting\Antigravity\Lumen\Lumen.Core\obj\Debug\net8.0-windows\Lumen.Core.AssemblyInfoInputs.cache
+D:\Reports\Scripting\Antigravity\Lumen\Lumen.Core\obj\Debug\net8.0-windows\Lumen.Core.AssemblyInfo.cs
+D:\Reports\Scripting\Antigravity\Lumen\Lumen.Core\obj\Debug\net8.0-windows\Lumen.Core.csproj.CoreCompileInputs.cache
+D:\Reports\Scripting\Antigravity\Lumen\Lumen.Core\obj\Debug\net8.0-windows\Lumen.Core.sourcelink.json
+D:\Reports\Scripting\Antigravity\Lumen\Lumen.Core\obj\Debug\net8.0-windows\Lumen.Core.dll
+D:\Reports\Scripting\Antigravity\Lumen\Lumen.Core\obj\Debug\net8.0-windows\refint\Lumen.Core.dll
+D:\Reports\Scripting\Antigravity\Lumen\Lumen.Core\obj\Debug\net8.0-windows\Lumen.Core.pdb
+D:\Reports\Scripting\Antigravity\Lumen\Lumen.Core\obj\Debug\net8.0-windows\ref\Lumen.Core.dll
