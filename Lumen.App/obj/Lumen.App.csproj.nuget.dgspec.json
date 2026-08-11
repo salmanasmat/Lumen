@@ -64,9 +64,9 @@
               "target": "Package",
               "version": "[10.0.10, )"
             },
-            "WPF.UI": {
+            "WPF-UI": {
               "target": "Package",
-              "version": "[3.4.2.7, )"
+              "version": "[4.0.0, )"
             }
           },
           "imports": [
@@ -135,6 +135,32 @@
         "net8.0": {
           "framework": "net8.0",
           "targetAlias": "net8.0",
+          "dependencies": {
+            "CommunityToolkit.Mvvm": {
+              "target": "Package",
+              "version": "[8.4.2, )"
+            },
+            "Microsoft.Data.Sqlite": {
+              "target": "Package",
+              "version": "[10.0.10, )"
+            },
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[10.0.10, )"
+            },
+            "System.Management": {
+              "target": "Package",
+              "version": "[10.0.10, )"
+            },
+            "System.ServiceProcess.ServiceController": {
+              "target": "Package",
+              "version": "[10.0.10, )"
+            },
+            "TaskScheduler": {
+              "target": "Package",
+              "version": "[2.12.2, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
