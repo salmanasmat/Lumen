@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
 using Wpf.Ui.Appearance;
+using Wpf.Ui.Controls;
 using Lumen.Core.Data;
 using Lumen.Core.Interfaces;
 using Lumen.Core.Services;
-using Lumen.App.Services;
 using Lumen.App.ViewModels;
 using Lumen.App.Views;
 
@@ -29,7 +29,7 @@ public partial class App : Application
         {
             LogCrash(args.Exception);
             args.Handled = true;
-            MessageBox.Show($"An unexpected error occurred:\n{args.Exception.Message}\n\nDetails logged to %LocalAppData%\\Lumen\\crash.log", "Lumen Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            System.Windows.MessageBox.Show($"An unexpected error occurred:\n{args.Exception.Message}\n\nDetails logged to %LocalAppData%\\Lumen\\crash.log", "Lumen Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
         };
 
         // Apply WPF-UI Light Theme globally
